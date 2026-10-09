@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RHR POSTER MAKAR</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff7a44">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0f0f0f;color:#fff;padding:12px}
+.top{background:#1a1a1a;border-radius:20px;padding:15px;display:flex;gap:12px;align-items:center}
+.logo{width:50px;height:50px;background:linear-gradient(45deg,#ff9a44,#ff4d6d);border-radius:14px;display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:24px}
+#posterArea{max-width:360px;margin:15px auto;background:#1a1a1a;border-radius:18px;padding:14px}
+#poster{width:100%;aspect-ratio:3/4;background:#222;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background-size:cover;background-position:center;border:2px solid #333}
+#poster h1{font-size:36px;background:linear-gradient(45deg,#ff9a44,#ff4d6d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;line-height:1.1}
+#poster p{margin-top:12px;font-size:19px;color:#ffb26e;font-weight:700}
+.controls{background:#1a1a1a;border-radius:18px;padding:15px}
+input{width:100%;padding:14px;border-radius:12px;border:none;background:#252525;color:#fff;margin:8px 0}
+button{width:100%;padding:15px;border-radius:12px;border:none;font-weight:900;font-size:17px;margin-top:10px}
+.dl{background:linear-gradient(45deg,#ff9a44,#ff4d6d);color:#fff}
+#installBtn{background:#fff;color:#000;display:none}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">R</div><div><h3>RHR POSTER MAKAR</h3><small>by RH REDOY</small></div></div>
+<div id="posterArea"><div id="poster"><h1 id="t1">RHR<br>POSTER MAKAR</h1><p id="t2">বাংলা পোস্টার বানাও<br>সহজে</p></div></div>
+<div class="controls">
+<input id="inp1" placeholder="তোমার লেখা ১ - যেমন: RHR">
+<input id="inp2" placeholder="তোমার লেখা ২ - যেমন: বাংলা পোস্টার">
+<input type="file" id="bg" accept="image/*">
+<button id="installBtn">📲 App Install করুন</button>
+<button class="dl" onclick="download()">⬇ ডাউনলোড করুন</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+let dP;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dP=e;document.getElementById('installBtn').style.display='block'});
+document.getElementById('installBtn').addEventListener('click',()=>{if(dP)dP.prompt()});
+const t1=document.getElementById('t1'),t2=document.getElementById('t2');
+document.getElementById('inp1').addEventListener('input',e=>{t1.innerHTML=(e.target.value||'RHR<br>POSTER MAKAR').replace(/\n/g,'<br>')});
+document.getElementById('inp2').addEventListener('input',e=>{t2.innerHTML=(e.target.value||'বাংলা পোস্টার বানাও<br>সহজে').replace(/\n/g,'<br>')});
+document.getElementById('bg').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=ev=>{document.getElementById('poster').style.backgroundImage=`url(${ev.target.result})`};r.readAsDataURL(f)});
+function download(){html2canvas(document.getElementById('poster'),{scale:2}).then(c=>{let a=document.createElement('a');a.download='RHR-Poster.png';a.href=c.toDataURL();a.click()})}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+</script>
+</body>
+</html>
