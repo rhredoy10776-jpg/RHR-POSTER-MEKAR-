@@ -1,0 +1,15 @@
+{
+  "name": "RHR POSTER MAKAR",
+  "short_name": "RHR",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f0f0f",
+  "theme_color": "#ff7a44",
+  "icons": [
+    {
+      "src": "rhredoy10776-jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
